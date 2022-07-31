@@ -10,11 +10,11 @@ namespace Calculator.Viewmodel
     public class ButtonViewmodel: ViewModelBase
     {
         private ButtonModel _buttonModel;
-        public RelayCommand pressBtn { get; set; }
+        public RelayCommand PressBtn { get; set; }
         public ButtonViewmodel()
         {
             _buttonModel = new ButtonModel();
-            pressBtn = new RelayCommand(o => PressBtn());
+            //pressBtn = new RelayCommand(o => PressBtn());
         }
         public int GridColumn 
         { 
@@ -35,23 +35,6 @@ namespace Calculator.Viewmodel
         {
             get { return _buttonModel.Content; }
             set { _buttonModel.Content = value; OnPropertyChanged(); }
-        }
-        public Symbol Symbol
-        {
-            get { return _buttonModel.Symbol; }
-            set { _buttonModel.Symbol = value; OnPropertyChanged(); }
-        }
-        void PressBtn()
-        {
-            switch (Symbol)
-            {
-                case Symbol.Clear:
-                    break;
-                case Symbol.Equal:
-                    break;
-                case Symbol.Others:
-                    break;
-            }
-        }
+        }       
     }
 }

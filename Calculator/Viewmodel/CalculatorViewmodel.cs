@@ -10,10 +10,14 @@ namespace Calculator.Viewmodel
 {
     class CalculatorViewmodel:ViewModelBase
     {
+        public RelayCommand InsertCmd { get; set; }
+        public RelayCommand QueryCmd { get; set; }
         private CalculatorModel _calculatorModel;
         public CalculatorViewmodel()
         {
             _calculatorModel = new CalculatorModel();
+            InsertCmd = new RelayCommand(o => Insert());
+            QueryCmd = new RelayCommand(o => Query());
             Loadcalculator();
         }
         public string Content
@@ -51,25 +55,48 @@ namespace Calculator.Viewmodel
         public void Loadcalculator()
         {
             Buttons = new ObservableCollection<ButtonViewmodel>();
-            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 0, Content = "D", Symbol = Symbol.Clear });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 0, Content = "C", Symbol = Symbol.Clear });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 0, Content = "AC", Symbol = Symbol.Clear });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 0, Content = "/" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 1, Content = "7" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 1, Content = "8" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 1, Content = "9" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 1, Content = "*" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 2, Content = "4" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 2, Content = "5" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 2, Content = "6" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 2, Content = "-" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 3, Content = "1" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 3, Content = "2" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 3, Content = "3" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 3, Content = "+" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 4, Content = "0" });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 4, Content = "." });
-            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 4, GridColumnSpan = 2, Content = "=", Symbol= Symbol.Equal });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 0, Content = "D", PressBtn = new RelayCommand(o => Clear()) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 0, Content = "C", PressBtn = new RelayCommand(o => Clear()) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 0, Content = "AC", PressBtn = new RelayCommand(o => Clear()) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 0, Content = "/", PressBtn = new RelayCommand(o=> Print("/")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 1, Content = "7", PressBtn = new RelayCommand(o => Print("7")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 1, Content = "8", PressBtn = new RelayCommand(o => Print("8")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 1, Content = "9", PressBtn = new RelayCommand(o => Print("9")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 1, Content = "*", PressBtn = new RelayCommand(o => Print("*")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 2, Content = "4", PressBtn = new RelayCommand(o => Print("4")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 2, Content = "5", PressBtn = new RelayCommand(o => Print("5")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 2, Content = "6", PressBtn = new RelayCommand(o => Print("6")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 2, Content = "-", PressBtn = new RelayCommand(o => Print("-")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 3, Content = "1", PressBtn = new RelayCommand(o => Print("1")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 3, Content = "2", PressBtn = new RelayCommand(o => Print("2")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 3, Content = "3", PressBtn = new RelayCommand(o => Print("3")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 3, GridRow = 3, Content = "+", PressBtn = new RelayCommand(o => Print("+")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 0, GridRow = 4, Content = "0", PressBtn = new RelayCommand(o => Print("0")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 1, GridRow = 4, Content = ".", PressBtn = new RelayCommand(o => Print(".")) });
+            Buttons.Add(new ButtonViewmodel { GridColumn = 2, GridRow = 4, GridColumnSpan = 2, Content = "=", PressBtn = new RelayCommand(o => Calculate()) });
+        }
+        void Print(string str)
+        {
+            if (Content == "0")
+                Content = str;
+            else
+                Content += str;
+        }
+        void Clear()
+        {
+            Content = "0";
+        }
+        void Calculate()
+        {
+
+        }
+        void Insert()
+        {
+
+        }
+        void Query()
+        {
+
         }
     }
 }

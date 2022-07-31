@@ -54,6 +54,7 @@
                         Grid.Column="{Binding GridColumn}"
                         Grid.ColumnSpan="{Binding GridColumnSpan}"
                         Content="{Binding Content}"
+                        Command="{Binding PressBtn}"
                         FontSize="35"
                         Background="LightGray"
                         BorderBrush="DarkGray"
@@ -85,8 +86,8 @@
 
             </Grid>
         </StackPanel>
-        <Button Content="Insert" HorizontalAlignment="Left" Height="61" Margin="568,26,0,0" VerticalAlignment="Top" Width="93"/>
-        <Button Content="Query" HorizontalAlignment="Left" Height="61" Margin="802,26,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button Content="Insert" HorizontalAlignment="Left" Height="61" Margin="568,26,0,0" VerticalAlignment="Top" Width="93" Command="{Binding InsertCmd}" FontSize="20"/>
+        <Button Content="Query" HorizontalAlignment="Left" Height="61" Margin="802,26,0,0" VerticalAlignment="Top" Width="93" Command="{Binding QueryCmd}" FontSize="20"/>
         <Label Content="Preorder" HorizontalAlignment="Left" Height="64" Margin="500,190,0,0" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
         <Label Content= "{Binding Preorder}" HorizontalAlignment="Left" Height="64" Margin="605,190,0,0" VerticalAlignment="Top" Width="290" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" FontSize="20"/>
         <Label Content="Postorder" HorizontalAlignment="Left" Height="64" Margin="500,290,0,0" VerticalAlignment="Top" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
