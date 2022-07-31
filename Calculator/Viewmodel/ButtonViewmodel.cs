@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Calculator.Model;
+
+namespace Calculator.Viewmodel
+{
+    public class ButtonViewmodel: ViewModelBase
+    {
+        private ButtonModel _buttonModel;
+        public RelayCommand pressBtn { get; set; }
+        public ButtonViewmodel()
+        {
+            _buttonModel = new ButtonModel();
+            pressBtn = new RelayCommand(o => PressBtn());
+        }
+        public int GridColumn 
+        { 
+            get { return _buttonModel.GridColumn; }
+            set { _buttonModel.GridColumn = value; OnPropertyChanged(); }
+        }
+        public int GridRow
+        {
+            get { return _buttonModel.GridRow; }
+            set { _buttonModel.GridRow = value; OnPropertyChanged(); }
+        }
+        public int GridColumnSpan
+        {
+            get { return _buttonModel.GridColumnSpan; }
+            set { _buttonModel.GridColumnSpan = value; OnPropertyChanged(); }
+        }
+        public string Content
+        {
+            get { return _buttonModel.Content; }
+            set { _buttonModel.Content = value; OnPropertyChanged(); }
+        }
+        public Symbol Symbol
+        {
+            get { return _buttonModel.Symbol; }
+            set { _buttonModel.Symbol = value; OnPropertyChanged(); }
+        }
+        void PressBtn()
+        {
+            switch (Symbol)
+            {
+                case Symbol.Clear:
+                    break;
+                case Symbol.Equal:
+                    break;
+                case Symbol.Others:
+                    break;
+            }
+        }
+    }
+}
