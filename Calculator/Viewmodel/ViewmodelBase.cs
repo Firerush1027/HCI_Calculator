@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using Calculator.Model;
 
 namespace Calculator.Viewmodel
 {
@@ -21,4 +23,5 @@ namespace Calculator.Viewmodel
             }
         }
     }
+    
 }

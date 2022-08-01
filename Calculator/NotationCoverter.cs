@@ -18,9 +18,9 @@ namespace Calculator
 		private static readonly Dictionary<char, int> Operators = new Dictionary<char, int>
 	{
 		{'-', 1},
-		{'+', 2},
-		{'/', 3},
-		{'*', 4}
+		{'+', 1},
+		{'/', 2},
+		{'*', 2}
 	};
 
 		/// <summary>
@@ -115,9 +115,9 @@ namespace Calculator
 				}
 			}
 
-			EmptyOperatorStack(operatorStack, output);
+			EmptyPrefixOperatorStack(operatorStack, operands, tempOperand);
 
-			return output.ToString();
+			return operands.Peek();
 		}
 		/// <summary>
 		/// Pops operators off operatorStack having greater or equal precedence to operatorToken, appends the operators
@@ -218,7 +218,30 @@ namespace Calculator
 				output.Append(' ').Append(operatorStack.Pop());
 			}
 		}
+		private static void EmptyPrefixOperatorStack(Stack<char> operatorStack, Stack<String> operands, StringBuilder tempOperand)
+		{
+			tempOperand.Append(" ");
+			operands.Push(tempOperand.ToString());
+			tempOperand.Clear();
+			while (operatorStack.Count > 0)
+			{
+				if (operatorStack.Peek() == '(')
+				{
+					throw new Exception("Missing ) parenthesis.");
+				}
+				String op1 = operands.Peek();
+				operands.Pop();
 
+				String op2 = operands.Peek();
+				operands.Pop();
+
+				char op = operatorStack.Peek();
+				operatorStack.Pop();
+
+				String tmp = op + op2 + op1;
+				operands.Push(tmp);
+			}
+		}
 		#endregion
 
 		#region EvaluatePostfix
@@ -297,5 +320,10 @@ namespace Calculator
 		}
 
 		#endregion
+		public static string Decimal2Binary(decimal result)
+        {
+			int resultINT = Decimal.ToInt32(result);
+			return Convert.ToString(resultINT, 2);
+		}
 	}
 }

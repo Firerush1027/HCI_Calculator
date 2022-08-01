@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Calculator.Model;
+using Calculator.View;
 
 namespace Calculator.Viewmodel
 {
@@ -88,15 +90,32 @@ namespace Calculator.Viewmodel
         }
         void Calculate()
         {
+            var result = NotationCoverter.EvaluateInfix(Content);
+            Preorder =NotationCoverter.InfixToPrefix(Content);  
             Postorder = NotationCoverter.InfixToPostfix(Content);
+            Decimal = result.ToString();
+            Binary = NotationCoverter.Decimal2Binary(result);
         }
         void Insert()
         {
-
+            DataBaseModel model = new DataBaseModel()
+            {
+                Infix = Content,
+                Prefix = Preorder,
+                Postfix = Postorder,
+                Decimal = Decimal,
+                Binary = Binary
+            };
+            bool success = DBManager.Insert(model);
+            if(success)
+                MessageBox.Show("Insert Success");
+            else
+                MessageBox.Show("Insert Fail!\n Data Exist");
         }
         void Query()
         {
-
+            QueryView queryView = new QueryView();
+            queryView.Show();
         }
     }
 }
