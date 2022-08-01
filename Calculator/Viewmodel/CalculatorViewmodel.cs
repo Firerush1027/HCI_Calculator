@@ -88,7 +88,7 @@ namespace Calculator.Viewmodel
         }
         void Calculate()
         {
-
+            Postorder = NotationCoverter.InfixToPostfix(Content);
         }
         void Insert()
         {
